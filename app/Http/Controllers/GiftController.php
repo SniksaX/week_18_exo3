@@ -33,7 +33,7 @@ class GiftController extends Controller
             'name' => 'required|string|min:3|max:50',
             'url' => 'nullable|string|url:http,https',
             'details' => 'nullable|string',
-            'price' => 'required|numeric'
+            'price' => 'required|decimal:0,2'
         ]);
         
         Gift::create($request->all());
