@@ -1,14 +1,18 @@
-<h1>{{ $gift->name }}</h1>
+@extends('layout')
 
-<p>prix : {{ $gift->price }} €</p>
+@section('content')
+    <h1>{{ $gift->name }}</h1>
 
-@if($gift->details)
-    <p>détails : {{ $gift->details }}</p>
-@endif
+    <p>prix : {{ $gift->price }} €</p>
 
-@if($gift->url)
-    <p>lien : <a href="{{ $gift->url }}" target="_blank">{{ $gift->url }}</a></p>
-@endif
+    @if($gift->details)
+        <p>détails : {{ $gift->details }}</p>
+    @endif
 
-<br>
-<a href="{{ route('gifts.index') }}">retour a la liste</a>
+    @if($gift->url)
+        <p>lien : <a href="{{ $gift->url }}" target="_blank">{{ $gift->url }}</a></p>
+    @endif
+
+    <br>
+    <a href="{{ route('gifts.index') }}">Retour à la liste</a>
+@endsection

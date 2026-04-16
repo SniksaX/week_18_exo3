@@ -1,20 +1,24 @@
-<h1>liste des cadeaux</h1>
+@extends('layout')
 
-<a href="{{ route('gifts.create') }}">ajouter un cadeau</a>
+@section('content')
+    <h1>liste des cadeaux</h1>
 
-<ul>
-    @foreach($gifts as $gift)
-        <li>
-            {{ $gift->name }} - {{ $gift->price }} €
-            
-            <a href="{{ route('gifts.show', $gift->id) }}">voir</a>
-            <a href="{{ route('gifts.edit', $gift->id) }}">modifier</a>
-            
-            <form action="{{ route('gifts.destroy', $gift->id) }}" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit">supprimer</button>
-            </form>
-        </li>
-    @endforeach
-</ul>
+    <a href="{{ route('gifts.create') }}">ajouter un cadeau</a>
+
+    <ul>
+        @foreach($gifts as $gift)
+            <li>
+                {{ $gift->name }} - {{ $gift->price }} €
+                
+                <a href="{{ route('gifts.show', $gift->id) }}">Voir</a>
+                <a href="{{ route('gifts.edit', $gift->id) }}">Modifier</a>
+                
+                <form action="{{ route('gifts.destroy', $gift->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">supprimer</button>
+                </form>
+            </li>
+        @endforeach
+    </ul>
+@endsection

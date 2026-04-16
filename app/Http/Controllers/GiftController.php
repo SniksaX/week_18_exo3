@@ -44,34 +44,31 @@ class GiftController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Gift $gift)
     {
-        $gift = Gift::find($id);
         return view('gifts.show', ['gift' => $gift]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Gift $gift)
     {
-        $gift = Gift::find($id);
         return view('gifts.edit', ['gift' => $gift]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Gift $gift)
     {
         $request->validate([
             'name' => 'required|string|min:3|max:50',
-            'url' => 'nullable|string|starts_with:http,https',
+            'url' => 'nullable|string|url:http,https',
             'details' => 'nullable|string',
-            'price' => 'required|numeric'
+            'price' => 'required|decimal:0,2'
         ]);
 
-        $gift = Gift::find($id);
         $gift->update($request->all());
 
         return redirect()->route('gifts.index');
@@ -80,9 +77,8 @@ class GiftController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Gift $gift)
     {
-        $gift = Gift::find($id);
         $gift->delete();
         return redirect()->route('gifts.index');
     }
